@@ -1,7 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-// NEW: switch Safe Args on for this app.
-// It must come BELOW the android.application line
     id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -48,4 +46,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+
+    // --- STAGE 2: VIEWMODEL AND LIVEDATA DEPENDENCIES ---
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
 }

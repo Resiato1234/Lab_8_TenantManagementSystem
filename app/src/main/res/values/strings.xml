@@ -13,4 +13,6 @@
     <string name="about_description">Designed for managing tenants efficiently.</string>
     <string name="signed_in">Signed in</string>
     <string name="user_example">user@example.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
