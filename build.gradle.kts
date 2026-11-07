@@ -2,4 +2,6 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.navigation.safeargs) apply false
+    // KSP generates Room's database code while building
+    id("com.google.devtools.ksp") version "2.3.13" apply false
 }
