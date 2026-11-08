@@ -1,5 +1,6 @@
 package com.example.tenantmanagementsystem.ui.tenants
-
+import com.example.tenantmanagementsystem.ui.viewmodel.TenantViewModel
+import androidx.fragment.app.activityViewModels
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,13 +10,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.tenantmanagementsystem.R
-import com.example.tenantmanagementsystem.data.repository.TenantRepository
 import com.example.tenantmanagementsystem.databinding.FragmentViewTenantsBinding
 
 class ViewTenantsFragment : Fragment() {
     private var _binding: FragmentViewTenantsBinding? = null
     private val binding get() = _binding!!
+
+    // The SHARED ViewModel: every Fragment in MainActivity gets the SAME one
+    private val viewModel: TenantViewModel by activityViewModels()
     private val args: ViewTenantsFragmentArgs by navArgs()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,11 +47,9 @@ class ViewTenantsFragment : Fragment() {
             }
         }
 
-        val tenants = TenantRepository.tenants
-        if (tenants.isEmpty()) {
-            binding.allTenantsTextView.text = getString(R.string.no_tenants)
-        } else {
-            binding.allTenantsTextView.text = tenants.joinToString("\n\n") { it.summary() }
+        // OBSERVER: runs now, and again every time allTenantsText changes
+        viewModel.allTenantsText.observe(viewLifecycleOwner) { text ->
+            binding.allTenantsTextView.text = text
         }
     }
 
